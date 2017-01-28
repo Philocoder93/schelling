@@ -1,0 +1,42 @@
+
+body {
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+header {
+  height: 100px;
+  width: 100%;
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+main {
+  flex-grow: 1;
+  width: 100%;
+  background: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+footer {
+  height: 100px;
+  width: 100%;
+  background: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+  margin: 15px;
+  height: 100px;
+  width: 100px;
+  background: yellow;
+}
