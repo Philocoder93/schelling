@@ -106,47 +106,75 @@ for (y=5;y>=1;y--) {
   for (x=1;x<=5;x++) {
     for (i=0;i<pieces.length;i++) {
       if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+        var count = 0;
         for (j=0;j<pieces.length;j++) {
-          var liberties = 0;
-          if (!((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue'))) {
-            liberties++;
+          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+            count++;
+          }
+          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+            count++;
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
+            count++;
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
+            count++;
           } else {}
-          if (!((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue'))) {
-            liberties++;
-          } else {}
-          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue'))) {
-            liberties++;
-          } else {}
-          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue'))) {
-            liberties++;
-          } else {}
-          ///
-          if (liberties < 4) {
-            console.log('fire');
-            liberties = 0;
-          } else {}
+          // till here in both halves of the loop the entire thing is debugged
+          if (count == 3) {
+            for (k=0;k<pieces.length;k++) {
+              if () {
+
+              }
+              else if () {
+
+              }
+              else if () {
+
+              }
+              else {
+
+              }
+            }
+          }
+          else {
+
+          }
         }
       }
       else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+        var count = 0;
         for (j=0;j<pieces.length;j++) {
-          liberties = 0;
-          if (!((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red'))) {
-            liberties = liberties+1;
+          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+            count++;
+          }
+          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+            count++;
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
+            count++;
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
+            count++;
           } else {}
-          if (!((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red'))) {
-            liberties = liberties+1;
-          } else {}
-          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red'))) {
-            liberties = liberties+1;
-          } else {}
-          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red'))) {
-            liberties = liberties+1;
-          } else {}
-          ///
-          if (liberties < 4) {
-            console.log('fire');
-            liberties = 0;
-          } else {}
+          // till here in both halves of the loop the entire thing is debugged
+          if (count == 3) {
+            for (k=0;k<pieces.length;k++) {
+              if (pieces[k].color) {
+
+              }
+              else if () {
+
+              }
+              else if () {
+
+              }
+              else {
+
+              }
+            }
+          }
+          else {}
         }
       }
     }
