@@ -63,14 +63,14 @@ var pieces = [];
 for (x=1;x<=5;x++) {
   for (y=1;y<=5;y++) {
     var die = Math.random();
+    // console.log("die"+die);
     if (die<0.33) {
-      pieces.push(new Red());
+      pieces.push(new Red(x,y));
     }
-    else if (0.33<die<0.66) {
-      pieces.push(new Blue());
+    else if (die<0.66) {
+      pieces.push(new Blue(x,y));
     }
     else {
-
     }
   }
 }
@@ -83,6 +83,7 @@ $('document').ready(function(){
   for (i=1;i<26;i++) {
     $('main').append('<p class="box" id="'+i+'">test</p>');
   }
+  for ()
 })
 
 $('document').ready()
