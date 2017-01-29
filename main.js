@@ -59,7 +59,7 @@ $('document').ready(function(){
     }
   }
 })
-//new board
+//new board , aka previous work attached to a listener
 $('.click').on('click',function() {
   $('main').find('*').remove();
   pieces =[];
@@ -95,3 +95,66 @@ $('.click').on('click',function() {
     }
   }
 })
+//this is the adjacency detector
+for (y=5;y>=1;y--) {
+  for (x=1;x<=5;x++) {
+    for (i=0;i<pieces.length;i++) {
+      if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+        for (j=0;j<pieces.length;j++) {
+          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('left');
+          }
+          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('right');
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('down');
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('up');
+          }
+        }
+      }
+      else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+        for (j=0;j<pieces.length;j++) {
+          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('left');
+          }
+          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('right');
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('down');
+          }
+          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
+            console.log('hit');
+            console.log(x);
+            console.log(y);
+            console.log('up');
+          }
+        }
+      }
+    }
+  }
+}
