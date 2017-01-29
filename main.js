@@ -96,63 +96,57 @@ $('.click').on('click',function() {
   }
 })
 //this is the adjacency detector
+//alter the game logic so that it records how many sides there are free, not how
+//many are occupied, that way the computer can record how often you get a hit as
+//well as the location of the hit then, if the hit counter = 1, you know theres
+//only one value in the free array and you can reset the location properties of
+//the object in question in order to recreate the bord later with those altered
+//values.
 for (y=5;y>=1;y--) {
   for (x=1;x<=5;x++) {
     for (i=0;i<pieces.length;i++) {
       if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
         for (j=0;j<pieces.length;j++) {
-          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('left');
-          }
-          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('right');
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('down');
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('up');
-          }
+          var liberties = 0;
+          if (!((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue'))) {
+            liberties++;
+          } else {}
+          if (!((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue'))) {
+            liberties++;
+          } else {}
+          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue'))) {
+            liberties++;
+          } else {}
+          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue'))) {
+            liberties++;
+          } else {}
+          ///
+          if (liberties < 4) {
+            console.log('fire');
+            liberties = 0;
+          } else {}
         }
       }
       else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
         for (j=0;j<pieces.length;j++) {
-          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('left');
-          }
-          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('right');
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('down');
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
-            console.log('hit');
-            console.log(x);
-            console.log(y);
-            console.log('up');
-          }
+          liberties = 0;
+          if (!((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red'))) {
+            liberties = liberties+1;
+          } else {}
+          if (!((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red'))) {
+            liberties = liberties+1;
+          } else {}
+          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red'))) {
+            liberties = liberties+1;
+          } else {}
+          if (!((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red'))) {
+            liberties = liberties+1;
+          } else {}
+          ///
+          if (liberties < 4) {
+            console.log('fire');
+            liberties = 0;
+          } else {}
         }
       }
     }
