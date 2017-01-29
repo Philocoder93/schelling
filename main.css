@@ -16,10 +16,18 @@ header {
   justify-content: center;
   align-content: center;
 }
-main {
+.wrapper {
   flex-grow: 1;
   width: 100%;
-  background: blue;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main {
+  height: 650px;
+  width: 650px;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,14 +37,26 @@ main {
 footer {
   height: 100px;
   width: 100%;
-  background: purple;
+  background: blue;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+h3 {
+  display: block;
 }
 .box {
   margin: 15px;
   height: 100px;
   width: 100px;
-  background: yellow;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.red {
+  background: red !important;
+}
+.blue {
+  background: blue !important;
 }

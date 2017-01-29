@@ -4,25 +4,6 @@ function Red(x,y) {
     this.color = 'red';
     this.x = x;
     this.y = y;
-    // Object.defineProperty(this, "x", {
-    //   get: function() {
-    //     return x;
-    //   },
-    //   set: function(newName) {
-    //     name = newName;
-    //   },
-    //   configurable: false
-    // });
-    // Object.defineProperty(this, "y", {
-    //   get: function() {
-    //     return y;
-    //   },
-    //   set: function(newName) {
-    //     name = newName;
-    //   },
-    //   configurable: false
-    // });
-    // alternate notation
   }
   else {
     console.log('error, this = window');
@@ -35,30 +16,12 @@ function Blue(x,y) {
     this.color = 'blue';
     this.x = x;
     this.y = y;
-    // Object.defineProperty(this, "x", {
-    //   get: function() {
-    //     return x;
-    //   },
-    //   set: function(newName) {
-    //     name = newName;
-    //   },
-    //   configurable: false
-    // });
-    // Object.defineProperty(this, "y", {
-    //   get: function() {
-    //     return y;
-    //   },
-    //   set: function(newName) {
-    //     name = newName;
-    //   },
-    //   configurable: false
-    // });
-    // alternate notation
   }
   else {
     console.log('error, this = window');
   }
 }
+
 var pieces = [];
 for (x=1;x<=5;x++) {
   for (y=1;y<=5;y++) {
@@ -80,10 +43,24 @@ $('document').ready(function(){
 })
 
 $('document').ready(function(){
-  for (i=1;i<26;i++) {
-    $('main').append('<p class="box" id="'+i+'">test</p>');
+  for (y=5;y>=1;y--) {
+    for (x=1;x<=5;x++) {
+      done = false;
+      for (i=0;i<pieces.length;i++) {
+        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+          $('main').append('<div class="box '+x+' '+y+' red"><h3>this</h3></div>');
+          done = true;
+        }
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+          $('main').append('<div class="box '+x+' '+y+' blue"><h3>test</h3></div>');
+          done = true;
+        }
+      }
+      if (done == false) {
+        $('main').append('<div class="box '+x+' '+y+'"><h3>test</h3></div>');
+      }
+    }
   }
-  for ()
 })
 
 $('document').ready()

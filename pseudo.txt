@@ -16,4 +16,26 @@ both that it is red / blue as well as its x and y coordinates
 
 
 use the instanceof property to check which object are made using which
-constructor. 
+constructor.
+
+//this is some lefotver code from the main
+
+//alternate notation for the object constructors
+// Object.defineProperty(this, "x", {
+//   get: function() {
+//     return x;
+//   },
+//   set: function(newName) {
+//     name = newName;
+//   },
+//   configurable: false
+// });
+// Object.defineProperty(this, "y", {
+//   get: function() {
+//     return y;
+//   },
+//   set: function(newName) {
+//     name = newName;
+//   },
+//   configurable: false
+// });
