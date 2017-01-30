@@ -130,11 +130,25 @@ for (y=5;y>=1;y--) {
           } else {}
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
+            var match;
             for (k=0;k<pieces.length;k++) {
-              if () {
-
+              if ((pieces[k].x == (pieces[i].x)-1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == (pieces[i].x)+1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)-1)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)+1)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else {
               }
             }
+            console.log(match);
+            var match = 0;
           }
         }
       }
@@ -155,11 +169,25 @@ for (y=5;y>=1;y--) {
           } else {}
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
+            var match;
             for (k=0;k<pieces.length;k++) {
-              if () {
-
+              if ((pieces[k].x == (pieces[i].x)-1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == (pieces[i].x)+1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)-1)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)+1)&&(pieces[k].color == 'white')) {
+                match = pieces[k];
+              }
+              else {
               }
             }
+            console.log(match);
+            var match = 0;
           }
         }
       }
