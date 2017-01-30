@@ -187,6 +187,31 @@ for (y=5;y>=1;y--) {
   }
 }
 
+for (y=5;y>=1;y--) {
+  for (x=1;x<=5;x++) {
+    for (i=0;i<posMoves.length;i++) {
+      if ((posMoves[i].x == x)&&(posMoves[i].y == y)) {
+        for (j=0;j<pieces.length;j++) {
+          if ((pieces[j].x == (posMoves[i].x)-1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
+            console.log('left');
+          }
+          else if ((pieces[j].x == (posMoves[i].x)+1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
+            console.log('right');
+          }
+          else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)-1)&&(pieces[j].color == 'white')) {
+            console.log('down');
+          }
+          else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)+1)&&(pieces[j].color == 'white')) {
+            console.log('up');
+          }
+        }
+      }
+      else {
+      }
+    }
+  }
+}
+
 
 
 
