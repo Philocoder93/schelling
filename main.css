@@ -32,8 +32,8 @@ header > h2, header > h1 {
   align-items: center;
 }
 main {
-  height: 650px;
-  width: 650px;
+  height: 495px;
+  width: 495px;
   background: black;
   display: flex;
   justify-content: center;
@@ -53,20 +53,20 @@ h3 {
   display: block;
 }
 .box {
-  margin: 15px;
-  height: 100px;
-  width: 100px;
+  margin: 2.5px;
+  height: 10px;
+  width: 10px;
   background: white;
   display: flex;
   justify-content: center;
   align-content: center;
 }
 .red {
-  background: red !important;
+  background: red;
 }
 .blue {
-  background: blue !important;
+  background: blue;
 }
 .next {
-  
+
 }
