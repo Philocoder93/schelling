@@ -56,13 +56,13 @@ $('document').ready(function(){
     for (x=1;x<=5;x++) {
       for (i=0;i<pieces.length;i++) {
         if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
-          $('main').append('<div class="box '+x+' '+y+' red"><h3>test</h3></div>');
+          $('main').append('<div class="box x:'+x+' y:'+y+' red"><h3>test</h3></div>');
         }
         else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
-          $('main').append('<div class="box '+x+' '+y+' blue"><h3>test</h3></div>');
+          $('main').append('<div class="box x:'+x+' y:'+y+' blue"><h3>test</h3></div>');
         }
         else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
-          $('main').append('<div class="box '+x+' '+y+' white"><h3>test</h3></div>');
+          $('main').append('<div class="box x:'+x+' y:'+y+' white"><h3>test</h3></div>');
         }
         else {}
       }
@@ -201,7 +201,8 @@ for (y=5;y>=1;y--) {
               }
             }
             if (duplicate == 0) {
-              moves.push(pieces[j]);
+              var out = [pieces[j],posMoves[i]];
+              moves.push(out);
             }
             duplicate = 0;
           }
@@ -213,7 +214,8 @@ for (y=5;y>=1;y--) {
               }
             }
             if (duplicate == 0) {
-              moves.push(pieces[j]);
+              var out = [pieces[j],posMoves[i]];
+              moves.push(out);
             }
             duplicate = 0;
           }
@@ -225,7 +227,8 @@ for (y=5;y>=1;y--) {
               }
             }
             if (duplicate == 0) {
-              moves.push(pieces[j]);
+              var out = [pieces[j],posMoves[i]];
+              moves.push(out);
             }
             duplicate = 0;
           }
@@ -237,7 +240,8 @@ for (y=5;y>=1;y--) {
               }
             }
             if (duplicate == 0) {
-              moves.push(pieces[j]);
+              var out = [pieces[j],posMoves[i]];
+              moves.push(out);
             }
             duplicate = 0;
           }
@@ -248,11 +252,55 @@ for (y=5;y>=1;y--) {
     }
   }
 }
-
-
-
-
-
-
+//this is the piece of code that switches the position of the moves to be made
 console.log(posMoves);
 console.log(moves);
+
+$('.next').on('click', function () {
+  console.log('fire');
+  var rep = 0;
+  for (x=0;x<moves.length;x++) {
+    for (y=0;y<moves.length;y++) {
+      if ((x!=y)&&(moves[x][0]==moves[y][0])) {
+        rep++;
+      }
+    }
+  }
+  if (rep == 0) {
+    for (i=0;i<moves.length;i++) {
+      var holder1 = moves[i][0].x;
+      var holder2 = moves[i][0].y;
+      moves[i][0].x = moves[i][1].x;
+      moves[i][0].y = moves[i][1].y;
+      moves[i][1].x = holder1;
+      moves[i][1].y = holder2;
+    }
+  }
+
+
+  $('main').find('*').remove();
+
+  for (y=5;y>=1;y--) {
+    for (x=1;x<=5;x++) {
+      for (i=0;i<pieces.length;i++) {
+        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+          $('main').append('<div class="box '+x+' '+y+' red"><h3>test</h3></div>');
+        }
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+          $('main').append('<div class="box '+x+' '+y+' blue"><h3>test</h3></div>');
+        }
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
+          $('main').append('<div class="box '+x+' '+y+' white"><h3>test</h3></div>');
+        }
+      }
+    }
+  }
+})
+
+
+
+
+
+// for (x=0;x<pieces.length;i++) {
+//   $('main').find('x:'+pieces[i].x).find('y:'+pieces[i].y).css('background',pieces[i].color);
+// }
