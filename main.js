@@ -257,7 +257,153 @@ console.log(posMoves);
 console.log(moves);
 
 $('.next').on('click', function () {
-  console.log('fire');
+  var posMoves = [];
+  for (y=5;y>=1;y--) {
+    for (x=1;x<=5;x++) {
+      // this is cycling correctly
+      for (i=0;i<pieces.length;i++) {
+        // this is cycling correctly
+        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+          // this is cycling correctly
+          var count = 0;
+          for (j=0;j<pieces.length;j++) {
+            // this line is cycling correctly
+            if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+              count++;
+            }
+            else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
+              count++;
+            }
+            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
+              count++;
+            }
+            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
+              count++;
+            }
+            else {
+            }
+            // till here in both halves of the loop the entire thing is debugged
+            if (count == 3) {
+              var duplicate =0;
+              for (k=0;k<posMoves.length;k++) {
+                if (pieces[i] == posMoves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                posMoves.push(pieces[i]);
+              }
+              duplicate = 0;
+            }
+            else {
+
+            }
+          }
+        }
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+          // this is cycling correctly
+          var count = 0;
+          for (j=0;j<pieces.length;j++) {
+            // this line is working
+            if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+              count++;
+            }
+            else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
+              count++;
+            }
+            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
+              count++;
+            }
+            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
+              count++;
+            } else {}
+            // till here in both halves of the loop the entire thing is debugged
+            if (count == 3) {
+              var duplicate =0;
+              for (k=0;k<posMoves.length;k++) {
+                if (pieces[i] == posMoves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                posMoves.push(pieces[i]);
+              }
+              duplicate = 0;
+            }
+            else {
+
+            }
+          }
+        }
+      }
+    }
+  }
+  var moves = [];
+  for (y=5;y>=1;y--) {
+    for (x=1;x<=5;x++) {
+      for (i=0;i<posMoves.length;i++) {
+        if ((posMoves[i].x == x)&&(posMoves[i].y == y)) {
+          for (j=0;j<pieces.length;j++) {
+            if ((pieces[j].x == (posMoves[i].x)-1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
+              var duplicate =0;
+              for (k=0;k<moves.length;k++) {
+                if (pieces[j] == moves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                var out = [pieces[j],posMoves[i]];
+                moves.push(out);
+              }
+              duplicate = 0;
+            }
+            else if ((pieces[j].x == (posMoves[i].x)+1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
+              var duplicate =0;
+              for (k=0;k<moves.length;k++) {
+                if (pieces[j] == moves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                var out = [pieces[j],posMoves[i]];
+                moves.push(out);
+              }
+              duplicate = 0;
+            }
+            else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)-1)&&(pieces[j].color == 'white')) {
+              var duplicate =0;
+              for (k=0;k<moves.length;k++) {
+                if (pieces[j] == moves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                var out = [pieces[j],posMoves[i]];
+                moves.push(out);
+              }
+              duplicate = 0;
+            }
+            else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)+1)&&(pieces[j].color == 'white')) {
+              var duplicate =0;
+              for (k=0;k<moves.length;k++) {
+                if (pieces[j] == moves[k]) {
+                  duplicate ++;
+                }
+              }
+              if (duplicate == 0) {
+                var out = [pieces[j],posMoves[i]];
+                moves.push(out);
+              }
+              duplicate = 0;
+            }
+          }
+        }
+        else {
+        }
+      }
+    }
+  }
+
   var rep = 0;
   for (x=0;x<moves.length;x++) {
     for (y=0;y<moves.length;y++) {
