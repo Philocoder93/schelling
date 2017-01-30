@@ -103,13 +103,9 @@ $('.click').on('click',function() {
     }
   }
 })
-//this is the adjacency detector
-//alter the game logic so that it records how many sides there are free, not how
-//many are occupied, that way the computer can record how often you get a hit as
-//well as the location of the hit then, if the hit counter = 1, you know theres
-//only one value in the free array and you can reset the location properties of
-//the object in question in order to recreate the bord later with those altered
-//values.
+//this is a function that searches the board and finds every red or blue square that is bordered
+//by 3 squares of the opposite color
+var posMoves = [];
 for (y=5;y>=1;y--) {
   for (x=1;x<=5;x++) {
     // this is cycling correctly
@@ -136,25 +132,19 @@ for (y=5;y>=1;y--) {
           }
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
-            console.log('fire');
-            console.log(x);
-            console.log(y);
-            for (k=0;k<pieces.length;k++) {
-              if ((pieces[k].x == x-1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
-                console.log('left');
-              }
-              else if ((pieces[k].x == x+1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
-                console.log('right');
-              }
-              else if ((pieces[k].x == x)&&(pieces[k].y == y-1)&&(pieces[k].color == 'white')) {
-                console.log('down');
-              }
-              else if ((pieces[k].x == x)&&(pieces[k].y == y+1)&&(pieces[k].color == 'white')) {
-                console.log('up');
-              }
-              else {
+            var duplicate =0;
+            for (k=0;k<posMoves.length;k++) {
+              if (pieces[i] == posMoves[k]) {
+                duplicate ++;
               }
             }
+            if (duplicate == 0) {
+              posMoves.push(pieces[i]);
+            }
+            duplicate = 0;
+          }
+          else {
+
           }
         }
       }
@@ -177,30 +167,27 @@ for (y=5;y>=1;y--) {
           } else {}
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
-            console.log('fire');
-            console.log(x);
-            console.log(y);
-            for (k=0;k<pieces.length;k++) {
-              if ((pieces[k].x == x-1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
-                console.log('left');
-                pieces[i].x =
-                piece
-              }
-              else if ((pieces[k].x == x+1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
-                console.log('right');
-              }
-              else if ((pieces[k].x == x)&&(pieces[k].y == y-1)&&(pieces[k].color == 'white')) {
-                console.log('down');
-              }
-              else if ((pieces[k].x == x)&&(pieces[k].y == y+1)&&(pieces[k].color == 'white')) {
-                console.log('up');
-              }
-              else {
+            var duplicate =0;
+            for (k=0;k<posMoves.length;k++) {
+              if (pieces[i] == posMoves[k]) {
+                duplicate ++;
               }
             }
+            if (duplicate == 0) {
+              posMoves.push(pieces[i]);
+            }
+            duplicate = 0;
+          }
+          else {
+
           }
         }
       }
     }
   }
 }
+
+
+
+
+console.log(posMoves);
