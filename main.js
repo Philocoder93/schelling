@@ -186,23 +186,60 @@ for (y=5;y>=1;y--) {
     }
   }
 }
-
+// this is a bit of code that searches the board and delivers an array of all the moves that need to be made
+var moves = [];
 for (y=5;y>=1;y--) {
   for (x=1;x<=5;x++) {
     for (i=0;i<posMoves.length;i++) {
       if ((posMoves[i].x == x)&&(posMoves[i].y == y)) {
         for (j=0;j<pieces.length;j++) {
           if ((pieces[j].x == (posMoves[i].x)-1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-            console.log('left');
+            var duplicate =0;
+            for (k=0;k<moves.length;k++) {
+              if (pieces[j] == moves[k]) {
+                duplicate ++;
+              }
+            }
+            if (duplicate == 0) {
+              moves.push(pieces[j]);
+            }
+            duplicate = 0;
           }
           else if ((pieces[j].x == (posMoves[i].x)+1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-            console.log('right');
+            var duplicate =0;
+            for (k=0;k<moves.length;k++) {
+              if (pieces[j] == moves[k]) {
+                duplicate ++;
+              }
+            }
+            if (duplicate == 0) {
+              moves.push(pieces[j]);
+            }
+            duplicate = 0;
           }
           else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)-1)&&(pieces[j].color == 'white')) {
-            console.log('down');
+            var duplicate =0;
+            for (k=0;k<moves.length;k++) {
+              if (pieces[j] == moves[k]) {
+                duplicate ++;
+              }
+            }
+            if (duplicate == 0) {
+              moves.push(pieces[j]);
+            }
+            duplicate = 0;
           }
           else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)+1)&&(pieces[j].color == 'white')) {
-            console.log('up');
+            var duplicate =0;
+            for (k=0;k<moves.length;k++) {
+              if (pieces[j] == moves[k]) {
+                duplicate ++;
+              }
+            }
+            if (duplicate == 0) {
+              moves.push(pieces[j]);
+            }
+            duplicate = 0;
           }
         }
       }
@@ -215,4 +252,7 @@ for (y=5;y>=1;y--) {
 
 
 
+
+
 console.log(posMoves);
+console.log(moves);
