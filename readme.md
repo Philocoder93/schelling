@@ -14,3 +14,7 @@ user stories:
 5. As a user, I should be able to resize the board to as large or as small as I want.
 
 User story 5 requires new functionality that I will add later.
+
+New Step only works some of the time. 
+
+Need to radically simplify/ clean up the code.
