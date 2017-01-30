@@ -21,6 +21,17 @@ function Blue(x,y) {
     console.log('error, this = window');
   }
 }
+function White(x,y) {
+  if (this instanceof White) {
+    this.id = "started at "+x+","+y;
+    this.color = 'white';
+    this.x = x;
+    this.y = y;
+  }
+  else {
+    console.log('error, this = window');
+  }
+}
 //this is the array that the pieces will go into
 var pieces = [];
 //this is the double loop that creates the pieces and pushes them to the array
@@ -34,6 +45,7 @@ for (x=1;x<=5;x++) {
       pieces.push(new Blue(x,y));
     }
     else {
+      pieces.push(new White(x,y));
     }
   }
 }
@@ -42,19 +54,17 @@ for (x=1;x<=5;x++) {
 $('document').ready(function(){
   for (y=5;y>=1;y--) {
     for (x=1;x<=5;x++) {
-      done = false;
       for (i=0;i<pieces.length;i++) {
         if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
           $('main').append('<div class="box '+x+' '+y+' red"><h3>test</h3></div>');
-          done = true;
         }
         else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
           $('main').append('<div class="box '+x+' '+y+' blue"><h3>test</h3></div>');
-          done = true;
         }
-      }
-      if (done == false) {
-        $('main').append('<div class="box '+x+' '+y+'"><h3>test</h3></div>');
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
+          $('main').append('<div class="box '+x+' '+y+' white"><h3>test</h3></div>');
+        }
+        else {}
       }
     }
   }
@@ -73,24 +83,22 @@ $('.click').on('click',function() {
         pieces.push(new Blue(x,y));
       }
       else {
+        pieces.push(new White(x,y));
       }
     }
   }
   for (y=5;y>=1;y--) {
     for (x=1;x<=5;x++) {
-      done = false;
       for (i=0;i<pieces.length;i++) {
         if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
           $('main').append('<div class="box '+x+' '+y+' red"><h3>test</h3></div>');
-          done = true;
         }
         else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
           $('main').append('<div class="box '+x+' '+y+' blue"><h3>test</h3></div>');
-          done = true;
         }
-      }
-      if (done == false) {
-        $('main').append('<div class="box '+x+' '+y+'"><h3>test</h3></div>');
+        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
+          $('main').append('<div class="box '+x+' '+y+' white"><h3>test</h3></div>');
+        }
       }
     }
   }
@@ -126,19 +134,7 @@ for (y=5;y>=1;y--) {
               if () {
 
               }
-              else if () {
-
-              }
-              else if () {
-
-              }
-              else {
-
-              }
             }
-          }
-          else {
-
           }
         }
       }
@@ -160,21 +156,11 @@ for (y=5;y>=1;y--) {
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
             for (k=0;k<pieces.length;k++) {
-              if (pieces[k].color) {
-
-              }
-              else if () {
-
-              }
-              else if () {
-
-              }
-              else {
+              if () {
 
               }
             }
           }
-          else {}
         }
       }
     }
