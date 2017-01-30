@@ -14,6 +14,9 @@ number, include some control flow here, 1/3 chance of blue 1/3 chance of red
 1/3 chance of nothing. if get blue or red create an object that has the information
 both that it is red / blue as well as its x and y coordinates
 
+important: loop is probably fucking up because the print is outside the if loop so the
+var never gets reset
+
 
 use the instanceof property to check which object are made using which
 constructor.

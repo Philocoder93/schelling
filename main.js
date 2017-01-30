@@ -112,10 +112,14 @@ $('.click').on('click',function() {
 //values.
 for (y=5;y>=1;y--) {
   for (x=1;x<=5;x++) {
+    // this is cycling correctly
     for (i=0;i<pieces.length;i++) {
+      // this is cycling correctly
       if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
+        // this is cycling correctly
         var count = 0;
         for (j=0;j<pieces.length;j++) {
+          // this line is cycling correctly
           if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
             count++;
           }
@@ -127,34 +131,38 @@ for (y=5;y>=1;y--) {
           }
           else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
             count++;
-          } else {}
+          }
+          else {
+          }
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
-            var match;
+            console.log('fire');
+            console.log(x);
+            console.log(y);
             for (k=0;k<pieces.length;k++) {
-              if ((pieces[k].x == (pieces[i].x)-1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              if ((pieces[k].x == x-1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
+                console.log('left');
               }
-              else if ((pieces[k].x == (pieces[i].x)+1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x+1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
+                console.log('right');
               }
-              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)-1)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x)&&(pieces[k].y == y-1)&&(pieces[k].color == 'white')) {
+                console.log('down');
               }
-              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)+1)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x)&&(pieces[k].y == y+1)&&(pieces[k].color == 'white')) {
+                console.log('up');
               }
               else {
               }
             }
-            console.log(match);
-            var match = 0;
           }
         }
       }
       else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
+        // this is cycling correctly
         var count = 0;
         for (j=0;j<pieces.length;j++) {
+          // this line is working
           if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
             count++;
           }
@@ -169,25 +177,27 @@ for (y=5;y>=1;y--) {
           } else {}
           // till here in both halves of the loop the entire thing is debugged
           if (count == 3) {
-            var match;
+            console.log('fire');
+            console.log(x);
+            console.log(y);
             for (k=0;k<pieces.length;k++) {
-              if ((pieces[k].x == (pieces[i].x)-1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              if ((pieces[k].x == x-1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
+                console.log('left');
+                pieces[i].x =
+                piece
               }
-              else if ((pieces[k].x == (pieces[i].x)+1)&&(pieces[k].y == pieces[i].y)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x+1)&&(pieces[k].y == y)&&(pieces[k].color == 'white')) {
+                console.log('right');
               }
-              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)-1)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x)&&(pieces[k].y == y-1)&&(pieces[k].color == 'white')) {
+                console.log('down');
               }
-              else if ((pieces[k].x == pieces[i].x)&&(pieces[k].y == (pieces[i].y)+1)&&(pieces[k].color == 'white')) {
-                match = pieces[k];
+              else if ((pieces[k].x == x)&&(pieces[k].y == y+1)&&(pieces[k].color == 'white')) {
+                console.log('up');
               }
               else {
               }
             }
-            console.log(match);
-            var match = 0;
           }
         }
       }
