@@ -87,7 +87,7 @@ function checkRed(z,i,j) {
     count = (z[i-1][j] == 'red')? count+1 : count;
   } catch (e) {
   }
-  return (count == 1)? true : false;
+  return ((count == 1)||(count == 2)||(count == 3))? true : false;
 };
 
 function checkBlue(z,i,j) {
@@ -109,7 +109,7 @@ function checkBlue(z,i,j) {
   } catch (e) {
   }
   // console.log(count);
-  return (count == 1)? true : false;
+  return ((count == 1)||(count == 2)||(count == 3))? true : false;
 };
 
 function checkWhite(z,i,j) {

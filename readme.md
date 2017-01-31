@@ -1,10 +1,13 @@
 link to hosted app: https://philocoder93.github.io/schelling/
 
-This project does not use 2d arrays like other, similar projects, rather, it represents each square with an object in an array
-which possesses two keys: x and y. These keys are used to line objects up with their appropriate squares and apply the styles
-contained in the objects.
+When this project loads up (or when you hit the new board button), it fills the game board with a randomly generated assortment of white, red, and blue squares. After that is done every time you hit the "next move button" the game will check each red and blue square, if that square is bordered by squares of the opposite color it will move to an adjacent white square if one is available.
 
-This project utilizes three object constructors that are pushed to arrays. It also utilizes the Math.random() method.
+This project, like other, similar projects, uses 2d arrays to represent the various locations on the game board. By using two nested loops one can traverse this 2d structure
+left to right top to bottom. One can then create functions and call them inside the double loop and, in so doing, call a function on every single value in the double array.
+
+This project utilizes several functions that are passed into other functions. It also utilizes the Math.random() method.
+
+To 'install' this project just copy the https or ssh link in the repo and run 'git clone <ssh/https here>'
 
 user stories:
 1. As a user, I should be able to reset the board when I want to so that I can look for a game with possible moves.
@@ -15,6 +18,6 @@ user stories:
 
 User story 5 requires new functionality that I will add later.
 
-New Step only works some of the time. 
+New Step now works every time there is an available move.
 
 Need to radically simplify/ clean up the code.
