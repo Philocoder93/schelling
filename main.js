@@ -1,467 +1,42 @@
-//these are my object constructors
-function Red(x, y) {
-  if (this instanceof Red) {
-    this.id = "started at "+x+","+y;
-    this.color = 'red';
-    this.x = x;
-    this.y = y;
+function arrayWithinArray(x) {
+  z = [];
+  for (i=0;i<x;i++) {
+    z.push(new Array(x));
   }
-  else {
-    console.log('error, this = window');
-  }
-}
-function Blue(x,y) {
-  if (this instanceof Blue) {
-    this.id = "started at "+x+","+y;
-    this.color = 'blue';
-    this.x = x;
-    this.y = y;
-  }
-  else {
-    console.log('error, this = window');
-  }
-}
-function White(x,y) {
-  if (this instanceof White) {
-    this.id = "started at "+x+","+y;
-    this.color = 'white';
-    this.x = x;
-    this.y = y;
-  }
-  else {
-    console.log('error, this = window');
-  }
-}
-//this is the array that the pieces will go into
-var pieces = [];
-//this is the double loop that creates the pieces and pushes them to the array
-function newPieces () {
-  for (x=1;x<=33;x++) {
-    for (y=1;y<=33;y++) {
-      var die = Math.random();
-      if (die<0.33) {
-        pieces.push(new Red(x,y));
-      }
-      else if (die<0.66) {
-        pieces.push(new Blue(x,y));
-      }
-      else {
-        pieces.push(new White(x,y));
-      }
-    }
-  }
-};
-
-function piecesToAppend () {
-  for (y=33;y>=1;y--) {
-    for (x=1;x<=33;x++) {
-      for (i=0;i<pieces.length;i++) {
-        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
-          $('main').append('<div class="box x:'+x+' y:'+y+' red"></div>');
-        }
-        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
-          $('main').append('<div class="box x:'+x+' y:'+y+' blue"></div>');
-        }
-        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
-          $('main').append('<div class="box x:'+x+' y:'+y+' white"></div>');
-        }
-        else {}
-      }
-    }
-  }
-};
-
-
-//this is the triple loop that creates the squares and assigns classes to them
-//based on how they line up with the array
-$('document').ready(function(){
-  newPieces();
-  piecesToAppend();
-})
-//new board , aka previous work attached to a listener
-$('.click').on('click',function() {
-  $('main').find('*').remove();
-  pieces =[];
-  newPieces();
-  piecesToAppend();
-})
-//this is a function that searches the board and finds every red or blue square that is bordered
-//by 3 squares of the opposite color
-var posMoves = [];
-for (y=33;y>=1;y--) {
-  for (x=1;x<=33;x++) {
-    // this is cycling correctly
-    for (i=0;i<pieces.length;i++) {
-      // this is cycling correctly
-      if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
-        // this is cycling correctly
-        var count = 0;
-        for (j=0;j<pieces.length;j++) {
-          // this line is cycling correctly
-          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-            count++;
-          }
-          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-            count++;
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
-            count++;
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
-            count++;
-          }
-          else {
-          }
-          // till here in both halves of the loop the entire thing is debugged
-          if (count == 3) {
-            var duplicate =0;
-            for (k=0;k<posMoves.length;k++) {
-              if (pieces[i] == posMoves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              posMoves.push(pieces[i]);
-            }
-            duplicate = 0;
-          }
-          else {
-
-          }
-        }
-      }
-      else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
-        // this is cycling correctly
-        var count = 0;
-        for (j=0;j<pieces.length;j++) {
-          // this line is working
-          if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-            count++;
-          }
-          else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-            count++;
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
-            count++;
-          }
-          else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
-            count++;
-          } else {}
-          // till here in both halves of the loop the entire thing is debugged
-          if (count == 3) {
-            var duplicate =0;
-            for (k=0;k<posMoves.length;k++) {
-              if (pieces[i] == posMoves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              posMoves.push(pieces[i]);
-            }
-            duplicate = 0;
-          }
-          else {
-
-          }
-        }
-      }
-    }
-  }
-}
-// this is a bit of code that searches the board and delivers an array of all the moves that need to be made
-var moves = [];
-for (y=33;y>=1;y--) {
-  for (x=1;x<=33;x++) {
-    for (i=0;i<posMoves.length;i++) {
-      if ((posMoves[i].x == x)&&(posMoves[i].y == y)) {
-        for (j=0;j<pieces.length;j++) {
-          if ((pieces[j].x == (posMoves[i].x)-1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-            var duplicate =0;
-            for (k=0;k<moves.length;k++) {
-              if (pieces[j] == moves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              var out = [pieces[j],posMoves[i]];
-              moves.push(out);
-            }
-            duplicate = 0;
-          }
-          else if ((pieces[j].x == (posMoves[i].x)+1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-            var duplicate =0;
-            for (k=0;k<moves.length;k++) {
-              if (pieces[j] == moves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              var out = [pieces[j],posMoves[i]];
-              moves.push(out);
-            }
-            duplicate = 0;
-          }
-          else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)-1)&&(pieces[j].color == 'white')) {
-            var duplicate =0;
-            for (k=0;k<moves.length;k++) {
-              if (pieces[j] == moves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              var out = [pieces[j],posMoves[i]];
-              moves.push(out);
-            }
-            duplicate = 0;
-          }
-          else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)+1)&&(pieces[j].color == 'white')) {
-            var duplicate =0;
-            for (k=0;k<moves.length;k++) {
-              if (pieces[j] == moves[k]) {
-                duplicate ++;
-              }
-            }
-            if (duplicate == 0) {
-              var out = [pieces[j],posMoves[i]];
-              moves.push(out);
-            }
-            duplicate = 0;
-          }
-        }
-      }
-      else {
-      }
-    }
-  }
-}
-//this is the piece of code that switches the position of the moves to be made
-console.log(posMoves);
-console.log(moves);
-
-$('.next').on('click', function () {
-  var posMoves = [];
-  for (y=33;y>=1;y--) {
-    for (x=1;x<=33;x++) {
-      // this is cycling correctly
-      for (i=0;i<pieces.length;i++) {
-        // this is cycling correctly
-        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
-          // this is cycling correctly
-          var count = 0;
-          for (j=0;j<pieces.length;j++) {
-            // this line is cycling correctly
-            if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-              count++;
-            }
-            else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'blue')) {
-              count++;
-            }
-            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'blue')) {
-              count++;
-            }
-            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'blue')) {
-              count++;
-            }
-            else {
-            }
-            // till here in both halves of the loop the entire thing is debugged
-            if (count == 3) {
-              var duplicate =0;
-              for (k=0;k<posMoves.length;k++) {
-                if (pieces[i] == posMoves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                posMoves.push(pieces[i]);
-              }
-              duplicate = 0;
-            }
-            else {
-
-            }
-          }
-        }
-        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
-          // this is cycling correctly
-          var count = 0;
-          for (j=0;j<pieces.length;j++) {
-            // this line is working
-            if ((pieces[j].x == (pieces[i].x)-1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-              count++;
-            }
-            else if ((pieces[j].x == (pieces[i].x)+1)&&(pieces[j].y == pieces[i].y)&&(pieces[j].color == 'red')) {
-              count++;
-            }
-            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)-1)&&(pieces[j].color == 'red')) {
-              count++;
-            }
-            else if ((pieces[j].x == pieces[i].x)&&(pieces[j].y == (pieces[i].y)+1)&&(pieces[j].color == 'red')) {
-              count++;
-            } else {}
-            // till here in both halves of the loop the entire thing is debugged
-            if (count == 3) {
-              var duplicate =0;
-              for (k=0;k<posMoves.length;k++) {
-                if (pieces[i] == posMoves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                posMoves.push(pieces[i]);
-              }
-              duplicate = 0;
-            }
-            else {
-
-            }
-          }
-        }
-      }
-    }
-  }
-  var moves = [];
-  for (y=33;y>=1;y--) {
-    for (x=1;x<=33;x++) {
-      for (i=0;i<posMoves.length;i++) {
-        if ((posMoves[i].x == x)&&(posMoves[i].y == y)) {
-          for (j=0;j<pieces.length;j++) {
-            if ((pieces[j].x == (posMoves[i].x)-1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-              var duplicate =0;
-              for (k=0;k<moves.length;k++) {
-                if (pieces[j] == moves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                var out = [pieces[j],posMoves[i]];
-                moves.push(out);
-              }
-              duplicate = 0;
-            }
-            else if ((pieces[j].x == (posMoves[i].x)+1)&&(pieces[j].y == posMoves[i].y)&&(pieces[j].color == 'white')) {
-              var duplicate =0;
-              for (k=0;k<moves.length;k++) {
-                if (pieces[j] == moves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                var out = [pieces[j],posMoves[i]];
-                moves.push(out);
-              }
-              duplicate = 0;
-            }
-            else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)-1)&&(pieces[j].color == 'white')) {
-              var duplicate =0;
-              for (k=0;k<moves.length;k++) {
-                if (pieces[j] == moves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                var out = [pieces[j],posMoves[i]];
-                moves.push(out);
-              }
-              duplicate = 0;
-            }
-            else if ((pieces[j].x == posMoves[i].x)&&(pieces[j].y == (posMoves[i].y)+1)&&(pieces[j].color == 'white')) {
-              var duplicate =0;
-              for (k=0;k<moves.length;k++) {
-                if (pieces[j] == moves[k]) {
-                  duplicate ++;
-                }
-              }
-              if (duplicate == 0) {
-                var out = [pieces[j],posMoves[i]];
-                moves.push(out);
-              }
-              duplicate = 0;
-            }
-          }
-        }
-        else {
-        }
-      }
-    }
-  }
-  var rep = 0;
-  for (x=0;x<moves.length;x++) {
-    for (y=0;y<moves.length;y++) {
-      if ((x!=y)&&(moves[x][0]==moves[y][0])) {
-        rep++;
-        console.log('conflict');
-      }
-    }
-  }
-  if (rep == 0) {
-    for (i=0;i<moves.length;i++) {
-      var holder1 = moves[i][0].x;
-      var holder2 = moves[i][0].y;
-      moves[i][0].x = moves[i][1].x;
-      moves[i][0].y = moves[i][1].y;
-      moves[i][1].x = holder1;
-      moves[i][1].y = holder2;
-    }
-  }
-  $('main').find('*').remove();
-  for (y=33;y>=1;y--) {
-    for (x=1;x<=33;x++) {
-      for (i=0;i<pieces.length;i++) {
-        if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'red')) {
-          $('main').append('<div class="box '+x+' '+y+' red"></div>');
-        }
-        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'blue')) {
-          $('main').append('<div class="box '+x+' '+y+' blue"></div>');
-        }
-        else if ((pieces[i].x == x)&&(pieces[i].y == y)&&(pieces[i].color == 'white')) {
-          $('main').append('<div class="box '+x+' '+y+' white"></div>');
-        }
-      }
-    }
-  }
-})
-
-
-
-
-function arrayWithinArray(y) {
-  x = [];
-  for (i=0;i<y;i++) {
-    x.push(new Array(y));
-  }
+  return z;
 };
 
 //this works^^^
 
-function fillArray(x) {
-  var length = x.length;
+function fillArray(z) {
+  var length = z.length;
   for (i=0;i<length;i++) {
     for (j=0;j<length;j++) {
       var die = Math.random();
       if (die<0.33) {
-        x[i][j] = "red";
+        z[i][j] = "red";
       }
       else if (die<0.66) {
-        x[i][j] = "blue";
+        z[i][j] = "blue";
       }
       else {
-        x[i][j] = "white";
+        z[i][j] = "white";
       }
     }
   }
+  return z;
 };
 
 //this works too^^^
 
-function arrayToDiv(x) {
-  var length = x.length;
+function arrayToDiv(z) {
+  var length = z.length;
   for (i=0;i<length;i++) {
     for (j=0;j<length;j++) {
-      if (x[i][j] == 'red') {
+      if (z[i][j] == 'red') {
         $('main').append('<div class="box x:'+i+' y:'+j+' red"></div>');
       }
-      else if (x[i][j] == 'blue') {
+      else if (z[i][j] == 'blue') {
         $('main').append('<div class="box x:'+i+' y:'+j+' blue"></div>');
       }
       else {
@@ -479,115 +54,151 @@ function delDiv() {
 
 //this works^^^
 
-function checkFour(x,i,j,color) {
+function checkRed(z,i,j) {
   var count = 0;
-  if (x[i][j-1] == color) {
-    count = count + 1;
+  try {
+    count = (z[i][j+1] == 'red')? count+1 : count;
+  } catch (e) {
   }
-  else {
-
+  try {
+    count = (z[i][j-1] == 'red')? count+1 : count;
+  } catch (e) {
   }
-  if (x[i][j+1] == color) {
-    count = count + 1;
+  try {
+    count = (z[i+1][j] == 'red')? count+1 : count;
+  } catch (e) {
   }
-  else {
-
+  try {
+    count = (z[i-1][j] == 'red')? count+1 : count;
+  } catch (e) {
   }
-  if (x[i-1][j] == color) {
-    count = count + 1;
-  }
-  else {
-
-  }
-  if (x[i+1][j] == color) {
-    count = count + 1;
-  }
-  else {
-
-  }
-  if (count == 3) {
-    console.log(color);
-  }
-  else ()
+  return (count == 3)? true : false;
 };
 
-//broken
+//this works ^^^
 
-function checkAdjacent(x) {
-  var length = x.length;
+function checkBlue(z,i,j) {
+  var count = 0;
+  try {
+    count = (z[i][j+1] == 'blue')? count+1 : count;
+  } catch (e) {
+  }
+  try {
+    count = (z[i][j-1] == 'blue')? count+1 : count;
+  } catch (e) {
+  }
+  try {
+    count = (z[i+1][j] == 'blue')? count+1 : count;
+  } catch (e) {
+  }
+  try {
+    count = (z[i-1][j] == 'blue')? count+1 : count;
+  } catch (e) {
+  }
+  // console.log(count);
+  return (count == 3)? true : false;
+};
+
+//this works ^^^
+
+function checkWhite(z,i,j) {
+  var dir = null;
+  try {
+    dir = (z[i][j+1] == 'white')? i+":"+(j+1) : dir;
+  } catch(e) {
+  }
+  try {
+    dir = (z[i][j-1] == 'white')? i+":"+(j-1) : dir;
+  } catch(e) {
+  }
+  try {
+    dir = (z[i+1][j] == 'white')? (i+1)+":"+j : dir;
+  } catch(e) {
+  }
+  try {
+    dir = (z[i-1][j] == 'white')? (i-1)+":"+j : dir;
+  } catch(e) {
+  }
+  return (dir == null)? false : true;
+}
+
+function switchWhite(z,i,j) {
+  try {
+    if (z[i][j+1] == 'white') {
+      console.log(i+":"+j);
+      var val1 = z[i][j+1];
+      var val2 = z[i][j];
+      z[i][j+1] = val2;
+      z[i][j] = val1;
+    }
+  } catch(e) {
+  }
+  try {
+    if (z[i][j-1] == 'white') {
+      console.log(i+":"+j);
+      var val1 = z[i][j-1];
+      var val2 = z[i][j];
+      z[i][j-1] = val2;
+      z[i][j] = val1;
+    }
+  } catch(e) {
+  }
+  try {
+    if (z[i+1][j] == 'white') {
+      console.log(i+":"+j);
+      var val1 = z[i+1][j];
+      var val2 = z[i][j];
+      z[i+1][j] = val2;
+      z[i][j] = val1;
+    }
+  } catch(e) {
+  }
+  try {
+    if (z[i-1][j] == 'white') {
+      console.log(i+":"+j);
+      var val1 = z[i-1][j];
+      var val2 = z[i][j];
+      z[i-1][j] = val2;
+      z[i][j] = val1;
+    }
+  } catch(e) {
+  }
+}
+
+//this works ^^^
+
+function moveOut(z) {
+  var length = z.length;
   for (i=0;i<length;i++) {
     for (j=0;j<length;j++) {
-      if (x[i][j] == 'red') {
-        var count = 0;
-        if (x[i][j-1] == 'blue') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[i][j+1] == 'blue') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[i-1][j] == 'blue') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[i+1][j] == 'blue') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (count == 3) {
-          console.log('red');
-          count = 0;
+      if (z[i][j] == 'red') {
+        if (checkBlue(z,i,j)) {
+          if (checkWhite(z,i,j)) {
+            switchWhite(z,i,j);
+          }
         }
       }
-      else if (x[i][j] == 'blue') {
-        var count = 0;
-        var up = j+1;
-        var down = j-1;
-        var left = i-1;
-        var right = i+1;
-        if (x[i][down] == 'red') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[i][up] == 'red') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[left][j] == 'red') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (x[right][j] == 'red') {
-          count = count + 1;
-        }
-        else {
-
-        }
-        if (count == 3) {
-          console.log('blue');
-          count = 0;
+      else if (z[i][j] == 'blue') {
+        if (checkRed(z,i,j)) {
+          if (checkWhite(z,i,j)) {
+            switchWhite(z,i,j);
+          }
         }
       }
     }
   }
 };
-//broken
 
-// for (x=0;x<pieces.length;i++) {
-//   $('main').find('x:'+pieces[i].x).find('y:'+pieces[i].y).css('background',pieces[i].color);
-// }
+// function redOrBlue(x) {
+//   var length = x.length;
+//   for (i=0;i<length;i++) {
+//     for (j=0;j<length;j++) {
+//       if ((x[i][j] != undefined)&&(x[i][j+1]== 'red')) {
+//         console.log('red');
+//       }
+//       else if ((x[i][j+1] != undefined)&&(x[i][j+1]== 'blue')) {
+//         console.log('blue');
+//       }
+//     }
+//   }
+// };
