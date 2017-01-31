@@ -1,3 +1,22 @@
+$(document).ready(function () {
+  arrayToDiv(fillArray(arrayWithinArray(50)));
+});
+
+$('.click').on('click', function() {
+  delDiv();
+  arrayToDiv(fillArray(arrayWithinArray(50)));
+  console.log('done');
+});
+
+$('.next').on('click', function() {
+  moveOut(z);
+  delDiv();
+  arrayToDiv(z);
+  console.log('done');
+})
+//by changing the values in the above code one can change how big one wants
+//the board to be
+
 function arrayWithinArray(x) {
   z = [];
   for (i=0;i<x;i++) {
@@ -6,8 +25,8 @@ function arrayWithinArray(x) {
   return z;
 };
 
-//this works^^^
-
+//by changing the values in the function below you can set the relative chance of
+//spawning any of the three values
 function fillArray(z) {
   var length = z.length;
   for (i=0;i<length;i++) {
@@ -27,8 +46,6 @@ function fillArray(z) {
   return z;
 };
 
-//this works too^^^
-
 function arrayToDiv(z) {
   var length = z.length;
   for (i=0;i<length;i++) {
@@ -46,13 +63,11 @@ function arrayToDiv(z) {
   }
 };
 
-//this works^^^
-
 function delDiv() {
   $('main').find('*').remove();
 };
 
-//this works^^^
+// by changing the values in the code below one can change how reactive each piece is
 
 function checkRed(z,i,j) {
   var count = 0;
@@ -72,10 +87,8 @@ function checkRed(z,i,j) {
     count = (z[i-1][j] == 'red')? count+1 : count;
   } catch (e) {
   }
-  return (count == 3)? true : false;
+  return (count == 1)? true : false;
 };
-
-//this works ^^^
 
 function checkBlue(z,i,j) {
   var count = 0;
@@ -96,10 +109,8 @@ function checkBlue(z,i,j) {
   } catch (e) {
   }
   // console.log(count);
-  return (count == 3)? true : false;
+  return (count == 1)? true : false;
 };
-
-//this works ^^^
 
 function checkWhite(z,i,j) {
   var dir = null;
@@ -120,12 +131,12 @@ function checkWhite(z,i,j) {
   } catch(e) {
   }
   return (dir == null)? false : true;
-}
+};
 
 function switchWhite(z,i,j) {
   try {
     if (z[i][j+1] == 'white') {
-      console.log(i+":"+j);
+      // console.log(i+":"+j);
       var val1 = z[i][j+1];
       var val2 = z[i][j];
       z[i][j+1] = val2;
@@ -135,7 +146,7 @@ function switchWhite(z,i,j) {
   }
   try {
     if (z[i][j-1] == 'white') {
-      console.log(i+":"+j);
+      // console.log(i+":"+j);
       var val1 = z[i][j-1];
       var val2 = z[i][j];
       z[i][j-1] = val2;
@@ -145,7 +156,7 @@ function switchWhite(z,i,j) {
   }
   try {
     if (z[i+1][j] == 'white') {
-      console.log(i+":"+j);
+      // console.log(i+":"+j);
       var val1 = z[i+1][j];
       var val2 = z[i][j];
       z[i+1][j] = val2;
@@ -155,7 +166,7 @@ function switchWhite(z,i,j) {
   }
   try {
     if (z[i-1][j] == 'white') {
-      console.log(i+":"+j);
+      // console.log(i+":"+j);
       var val1 = z[i-1][j];
       var val2 = z[i][j];
       z[i-1][j] = val2;
@@ -163,9 +174,10 @@ function switchWhite(z,i,j) {
     }
   } catch(e) {
   }
-}
+};
 
-//this works ^^^
+//maybe in the future come back and take a look at this, make it so that when count != 3
+// the code randomly selects which one of the white matches it moves to.
 
 function moveOut(z) {
   var length = z.length;
@@ -188,17 +200,3 @@ function moveOut(z) {
     }
   }
 };
-
-// function redOrBlue(x) {
-//   var length = x.length;
-//   for (i=0;i<length;i++) {
-//     for (j=0;j<length;j++) {
-//       if ((x[i][j] != undefined)&&(x[i][j+1]== 'red')) {
-//         console.log('red');
-//       }
-//       else if ((x[i][j+1] != undefined)&&(x[i][j+1]== 'blue')) {
-//         console.log('blue');
-//       }
-//     }
-//   }
-// };
