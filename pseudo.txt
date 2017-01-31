@@ -2,7 +2,7 @@ first build the board
 in order to do this run a loop 25 times
 each time create an object and every fifth time attach a
 class to them that causes them to wrap
-at the end of that yo should have a 5 by 5 board
+at the end of that you should have a 5 by 5 board
 
 next you need to randomly attach either a red or a blue or no object to each
 in order to do this let the bottom left hand corner of the square be the origin
@@ -14,7 +14,7 @@ number, include some control flow here, 1/3 chance of blue 1/3 chance of red
 1/3 chance of nothing. if get blue or red create an object that has the information
 both that it is red / blue as well as its x and y coordinates
 
-important: loop is probably fucking up because the print is outside the if loop so the
+important: loop is probably screwing up because the print is outside the if loop so the
 var never gets reset
 
 
