@@ -12,7 +12,7 @@ $('.click').on('click', function() {
 });
 
 $('.next').on('click', function() {
-  moveOutRan(z);
+  moveOut(z);
   delDiv();
   arrayToDiv(z);
   console.log('done');
@@ -21,7 +21,7 @@ $('.next').on('click', function() {
 $('.multi').on('click', function () {
   var i =0;
   while (i<1000) {
-    moveOutRan(z);
+    moveOut(z);
     console.log('running');
     i = i+1;
   };
@@ -47,10 +47,10 @@ function fillArray(z) {
   for (i=0;i<length;i++) {
     for (j=0;j<length;j++) {
       var die = Math.random();
-      if (die<0.3) {
+      if (die<0.45) {
         z[i][j] = "red";
       }
-      else if (die<0.6) {
+      else if (die<0.9) {
         z[i][j] = "blue";
       }
       else {
@@ -81,6 +81,9 @@ function arrayToDiv(z) {
 function delDiv() {
   $('main').find('*').remove();
 };
+
+
+
 
 // by changing the values in the code below one can change how reactive each piece is
 
@@ -127,322 +130,355 @@ function checkBlue(z,i,j) {
   return ((count ==1 )||(count == 2)||(count == 3))? true : false;
 };
 
-function checkWhite(z,i,j) {
-  var dir = null;
-  try {
-    dir = (z[i][j+1] == 'white')? i+":"+(j+1) : dir;
-  } catch(e) {
+function getWhite(z) {
+  let z1 = []
+  for (let i=0;i<z.length;i++) {
+    for (let j=0;j<z.length;j++) {
+      if (z[i][j] == 'white') {
+        z1.push({
+          'x':i,
+          'y':j
+        })
+      }
+    }
   }
-  try {
-    dir = (z[i][j-1] == 'white')? i+":"+(j-1) : dir;
-  } catch(e) {
-  }
-  try {
-    dir = (z[i+1][j] == 'white')? (i+1)+":"+j : dir;
-  } catch(e) {
-  }
-  try {
-    dir = (z[i-1][j] == 'white')? (i-1)+":"+j : dir;
-  } catch(e) {
-  }
-  return (dir == null)? false : true;
-};
-
-function switchWhiteRan(z,i,j) {
-  var die = Math.random();
-  if (die < 0.25) {
-    switchWhite1(z,i,j);
-  }
-  else if (die < 0.5) {
-    switchWhite2(z,i,j)
-  }
-  else if (die < 0.75) {
-    switchWhite3(z,i,j)
-  }
-  else {
-    switchWhite4(z,i,j)
-  }
-
+  return z1
 }
 
-function switchWhite1(z,i,j) {
-  try {
-    if (z[i][j+1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j+1];
-      var val2 = z[i][j];
-      z[i][j+1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
+function randomize(z) {
+  let count = z.length
+  while (count > 0) {
+    let die = Math.floor(Math.random() * count);
+    [z[count - 1], z[die]] = [z[die], z[count - 1]];
+    count = count-1
   }
-  try {
-    if (z[i][j-1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j-1];
-      var val2 = z[i][j];
-      z[i][j-1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i+1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i+1][j];
-      var val2 = z[i][j];
-      z[i+1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i-1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i-1][j];
-      var val2 = z[i][j];
-      z[i-1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
+  return z
+}
 
-};
 
-function switchWhite2(z,i,j) {
-  try {
-    if (z[i-1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i-1][j];
-      var val2 = z[i][j];
-      z[i-1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i][j+1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j+1];
-      var val2 = z[i][j];
-      z[i][j+1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i][j-1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j-1];
-      var val2 = z[i][j];
-      z[i][j-1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i+1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i+1][j];
-      var val2 = z[i][j];
-      z[i+1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
 
-};
 
-function switchWhite3(z,i,j) {
-  try {
-    if (z[i+1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i+1][j];
-      var val2 = z[i][j];
-      z[i+1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i-1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i-1][j];
-      var val2 = z[i][j];
-      z[i-1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i][j+1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j+1];
-      var val2 = z[i][j];
-      z[i][j+1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i][j-1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j-1];
-      var val2 = z[i][j];
-      z[i][j-1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-};
 
-function switchWhite4(z,i,j) {
-  try {
-    if (z[i][j-1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j-1];
-      var val2 = z[i][j];
-      z[i][j-1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i+1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i+1][j];
-      var val2 = z[i][j];
-      z[i+1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i-1][j] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i-1][j];
-      var val2 = z[i][j];
-      z[i-1][j] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
-  try {
-    if (z[i][j+1] == 'white') {
-      // console.log(i+":"+j);
-      var val1 = z[i][j+1];
-      var val2 = z[i][j];
-      z[i][j+1] = val2;
-      z[i][j] = val1;
-    }
-  } catch(e) {
-  }
+// this works ^^^^
 
-};
+// function checkWhite(z,i,j) {
+//   var dir = null;
+//   try {
+//     dir = (z[i][j+1] == 'white')? i+":"+(j+1) : dir;
+//   } catch(e) {
+//   }
+//   try {
+//     dir = (z[i][j-1] == 'white')? i+":"+(j-1) : dir;
+//   } catch(e) {
+//   }
+//   try {
+//     dir = (z[i+1][j] == 'white')? (i+1)+":"+j : dir;
+//   } catch(e) {
+//   }
+//   try {
+//     dir = (z[i-1][j] == 'white')? (i-1)+":"+j : dir;
+//   } catch(e) {
+//   }
+//   return (dir == null)? false : true;
+// };
+//
+// function switchWhiteRan(z,i,j) {
+//   var die = Math.random();
+//   if (die < 0.25) {
+//     switchWhite1(z,i,j);
+//   }
+//   else if (die < 0.5) {
+//     switchWhite2(z,i,j)
+//   }
+//   else if (die < 0.75) {
+//     switchWhite3(z,i,j)
+//   }
+//   else {
+//     switchWhite4(z,i,j)
+//   }
+//
+// }
+
+// function switchWhite1(z,i,j) {
+//   try {
+//     if (z[i][j+1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j+1];
+//       var val2 = z[i][j];
+//       z[i][j+1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j-1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j-1];
+//       var val2 = z[i][j];
+//       z[i][j-1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i+1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i+1][j];
+//       var val2 = z[i][j];
+//       z[i+1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i-1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i-1][j];
+//       var val2 = z[i][j];
+//       z[i-1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//
+// };
+//
+// function switchWhite2(z,i,j) {
+//   try {
+//     if (z[i-1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i-1][j];
+//       var val2 = z[i][j];
+//       z[i-1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j+1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j+1];
+//       var val2 = z[i][j];
+//       z[i][j+1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j-1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j-1];
+//       var val2 = z[i][j];
+//       z[i][j-1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i+1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i+1][j];
+//       var val2 = z[i][j];
+//       z[i+1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//
+// };
+//
+// function switchWhite3(z,i,j) {
+//   try {
+//     if (z[i+1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i+1][j];
+//       var val2 = z[i][j];
+//       z[i+1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i-1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i-1][j];
+//       var val2 = z[i][j];
+//       z[i-1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j+1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j+1];
+//       var val2 = z[i][j];
+//       z[i][j+1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j-1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j-1];
+//       var val2 = z[i][j];
+//       z[i][j-1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+// };
+//
+// function switchWhite4(z,i,j) {
+//   try {
+//     if (z[i][j-1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j-1];
+//       var val2 = z[i][j];
+//       z[i][j-1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i+1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i+1][j];
+//       var val2 = z[i][j];
+//       z[i+1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i-1][j] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i-1][j];
+//       var val2 = z[i][j];
+//       z[i-1][j] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//   try {
+//     if (z[i][j+1] == 'white') {
+//       // console.log(i+":"+j);
+//       var val1 = z[i][j+1];
+//       var val2 = z[i][j];
+//       z[i][j+1] = val2;
+//       z[i][j] = val1;
+//     }
+//   } catch(e) {
+//   }
+//
+// };
 
 //maybe in the future come back and take a look at this, make it so that when count != 3
 // the code randomly selects which one of the white matches it moves to.
 
-function moveOutRan(z) {
-  var die = Math.random();
-  if (die < 0.25) {
-    moveOut1(z);
-  }
-  else if (die < 0.5) {
-    moveOut2(z);
-  }
-  else if (die < 0.75) {
-    moveOut3(z);
-  }
-  else {
-    moveOut4(z);
-  }
-}
-
-function moveOut1(z) {
+// function moveOutRan(z) {
+//   var die = Math.random();
+//   if (die < 0.25) {
+//     moveOut1(z);
+//   }
+//   else if (die < 0.5) {
+//     moveOut2(z);
+//   }
+//   else if (die < 0.75) {
+//     moveOut3(z);
+//   }
+//   else {
+//     moveOut4(z);
+//   }
+// }
+//
+function moveOut(z) {
   var length = z.length;
   for (i=0;i<length;i++) {
     for (j=0;j<length;j++) {
       if (z[i][j] == 'red') {
         if (checkBlue(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
+          let move = randomize(getWhite(z))
+          let swap = z[i][j]
+          z[i][j] = z[move[0].x][move[0].y]
+          z[move[0].x][move[0].y] = swap
         }
       }
       else if (z[i][j] == 'blue') {
         if (checkRed(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
+          let move = randomize(getWhite(z))
+          let swap = z[i][j]
+          z[i][j] = z[move[0].x][move[0].y]
+          z[move[0].x][move[0].y] = swap
         }
       }
     }
   }
 };
 
-function moveOut2(z) {
-  var length = z.length;
-  for (i=length-1;i>=0;i--) {
-    for (j=length-1;j>=0;j--) {
-      if (z[i][j] == 'red') {
-        if (checkBlue(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-      else if (z[i][j] == 'blue') {
-        if (checkRed(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-    }
-  }
-};
-
-function moveOut3(z) {
-  var length = z.length;
-  for (i=0;i<length;i++) {
-    for (j=length-1;j>=0;j--) {
-      if (z[i][j] == 'red') {
-        if (checkBlue(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-      else if (z[i][j] == 'blue') {
-        if (checkRed(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-    }
-  }
-};
-
-function moveOut4(z) {
-  var length = z.length;
-  for (i=length-1;i>=0;i--) {
-    for (j=0;j<length;j++) {
-      if (z[i][j] == 'red') {
-        if (checkBlue(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-      else if (z[i][j] == 'blue') {
-        if (checkRed(z,i,j)) {
-          if (checkWhite(z,i,j)) {
-            switchWhiteRan(z,i,j);
-          }
-        }
-      }
-    }
-  }
-};
+// function moveOut2(z) {
+//   var length = z.length;
+//   for (i=length-1;i>=0;i--) {
+//     for (j=length-1;j>=0;j--) {
+//       if (z[i][j] == 'red') {
+//         if (checkBlue(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//       else if (z[i][j] == 'blue') {
+//         if (checkRed(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//     }
+//   }
+// };
+//
+// function moveOut3(z) {
+//   var length = z.length;
+//   for (i=0;i<length;i++) {
+//     for (j=length-1;j>=0;j--) {
+//       if (z[i][j] == 'red') {
+//         if (checkBlue(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//       else if (z[i][j] == 'blue') {
+//         if (checkRed(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//     }
+//   }
+// };
+//
+// function moveOut4(z) {
+//   var length = z.length;
+//   for (i=length-1;i>=0;i--) {
+//     for (j=0;j<length;j++) {
+//       if (z[i][j] == 'red') {
+//         if (checkBlue(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//       else if (z[i][j] == 'blue') {
+//         if (checkRed(z,i,j)) {
+//           if (checkWhite(z,i,j)) {
+//             switchWhiteRan(z,i,j);
+//           }
+//         }
+//       }
+//     }
+//   }
+// };
