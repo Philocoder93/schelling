@@ -81,17 +81,18 @@ function newPath(x) {
 }
 // here x is the path and z is the board
 function traverse(x,z) {
-  let count = x.length
-  let die = Math.floor(Math.random() * count);
-  for (i=0;i<x[die].length;i++) {
-    if(){
-
+  let path = randomize(x)[0]
+  for (i=0;i<path.length;i++) {
+    let x1 = path[i][0]
+    let y1 = path[i][1]
+    if (z[x1][y1] == 'red') {
+      console.log(x1 + " " + y1 + "is red")
     }
-    else if(){
-
+    else if (z[x1][y1] == 'blue') {
+      console.log(x1 + " " + y1 + "is blue")
     }
     else {
-
+      console.log(x1 + " " + y1 + "is white")
     }
   }
 }
