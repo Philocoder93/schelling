@@ -32,34 +32,92 @@ $('.multi').on('click', function () {
 //by changing the values in the above code one can change how big one wants
 //the board to be
 
-function arrayWithinArray(x) {
-  z = [];
-  for (i=0;i<x;i++) {
-    z.push(new Array(x));
-  }
-  return z;
-};
-
-//by changing the values in the function below you can set the relative chance of
-//spawning any of the three values
-function fillArray(z) {
-  var length = z.length;
-  for (i=0;i<length;i++) {
-    for (j=0;j<length;j++) {
-      var die = Math.random();
+function newBoard(x) {
+  let z = []
+  for (let i=0;i<x;i++) {
+    z.push(new Array(x))
+    for (let j=0;j<x;j++) {
+      let die = Math.random()
       if (die<0.45) {
-        z[i][j] = "red";
+        z[i][j] = "red"
       }
       else if (die<0.9) {
-        z[i][j] = "blue";
+        z[i][j] = "blue"
       }
       else {
-        z[i][j] = "white";
+        z[i][j] = "white"
       }
     }
   }
-  return z;
+  return z
 };
+
+function randomize(z) {
+  let count = z.length
+  while (count > 0) {
+    let die = Math.floor(Math.random() * count);
+    [z[count - 1], z[die]] = [z[die], z[count - 1]];
+    count = count-1
+  }
+  return z
+}
+
+function newPath(x) {
+  let out = []
+  for (let h=0;h<3;h++) {
+    let inside1 = []
+    for (let i=0;i<x;i++) {
+      for (let j=0;j<x;j++) {
+        let inside2 = []
+        inside2.push(i)
+        inside2.push(j)
+        inside1.push(inside2)
+      }
+    }
+    inside1 = randomize(inside1)
+    out.push(inside1)
+  }
+  return out
+}
+// here x is the path and z is the board
+function traverse(x,z) {
+  let count = x.length
+  let die = Math.floor(Math.random() * count);
+  for (i=0;i<x[die].length;i++) {
+    if(){
+
+    }
+    else if(){
+
+    }
+    else {
+
+    }
+  }
+}
+
+// ^^^these three work
+
+//by changing the values in the function below you can set the relative chance of
+//spawning any of the three values
+// function fillArray(z) {
+//   var length = z.length;
+//   for (i=0;i<length;i++) {
+//     for (j=0;j<length;j++) {
+//       var die = Math.random();
+//       if (die<0.45) {
+//         z[i][j] = "red";
+//       }
+//       else if (die<0.9) {
+//         z[i][j] = "blue";
+//       }
+//       else {
+//         z[i][j] = "white";
+//       }
+//     }
+//   }
+//   return z;
+// };
 
 function arrayToDiv(z) {
   var length = z.length;
