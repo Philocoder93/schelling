@@ -1,16 +1,19 @@
 //ideal settings to see maximum effect are fillArray:0.3/0.6 checkRed/checkBlue:3
 //if use without randomizer then will clump to one side
+// ND: Code here is much more nicely spaced out and indented
 
 $(document).ready(function () {
   arrayToDiv(fillArray(arrayWithinArray(50)));
 });
 
+// ND: Be mindful of naming conventions here. Might be confusing to someone else looking at your code why you `click` here twice
 $('.click').on('click', function() {
   delDiv();
   arrayToDiv(fillArray(arrayWithinArray(50)));
   console.log('done');
 });
 
+// ND: Avoid having letter names, they're not semantic.
 $('.next').on('click', function() {
   moveOutRan(z);
   delDiv();
@@ -78,14 +81,18 @@ function arrayToDiv(z) {
   }
 };
 
+// ND: Nice job with method chaining, great way to DRY up code.
 function delDiv() {
   $('main').find('*').remove();
 };
 
 // by changing the values in the code below one can change how reactive each piece is
 
+// ND: Great for now since it's working, but seeing a lot of redundancy in the following functions. Think about how you can make this more DRY.
 function checkRed(z,i,j) {
   var count = 0;
+  // ND: Super sweet that you taught yourself try, catch. That said, maybe I'm missing something, but the 'catch' statement doesn't seem to be doing anything.
+  // ND: Additionally, we encourage newer devs to hold off on using try, catch. Just write good, working code.
   try {
     count = (z[i][j+1] == 'red')? count+1 : count;
   } catch (e) {
@@ -105,6 +112,7 @@ function checkRed(z,i,j) {
   return ((count ==1 )||(count == 2)||(count == 3))? true : false;
 };
 
+// ND: Again, would avoid letter parameters
 function checkBlue(z,i,j) {
   var count = 0;
   try {
@@ -359,6 +367,7 @@ function moveOutRan(z) {
   }
 }
 
+// ND: When you find yourself going this deep with conditionals, consider using switch statements instead.
 function moveOut1(z) {
   var length = z.length;
   for (i=0;i<length;i++) {
@@ -424,7 +433,7 @@ function moveOut3(z) {
     }
   }
 };
-
+// ND: Holy brackets Batman! Nice job keeping this organized and clear. I imagine this function might've caused you a few syntax headaches
 function moveOut4(z) {
   var length = z.length;
   for (i=length-1;i>=0;i--) {
