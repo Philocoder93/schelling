@@ -1,3 +1,5 @@
+ND: Excellent organization here. Clear plan of what you're trying to accomplish
+
 first build the board
 in order to do this run a loop 25 times
 each time create an object and every fifth time attach a
